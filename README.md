@@ -10,6 +10,8 @@ It's a hella quick and dirty powershell script to scrape DSC resources exported 
 
 This converts the default domain policy to a list of puppet resources and opens it in VS Code. From there you can move it into a profile and check it into puppet.
 
+![running the script](https://raw.githubusercontent.com/matthewrstone/gpno/master/img/quickvideo.gif)
+
 ## Contributing
 
 Please!
