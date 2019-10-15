@@ -1,0 +1,16 @@
+{
+    "name": "gpno::create_resources",
+    "description": "create puppet resources from json object",
+    "implementations": [
+        {
+            "name": "create_resources.py",
+            "requirements": ["shell"],
+            "files": ["python_task_helper/files/task_helper.py"],
+            "input_method": "stdin"        
+        },
+        {
+            "name": "create_resources.ps1",
+            "requirements": ["powershell"]
+        }
+      ]
+  }
