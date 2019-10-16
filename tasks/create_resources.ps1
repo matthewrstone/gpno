@@ -2,13 +2,13 @@ Param(
     $data
 )
 
-foreach ($item in $data.result.resources) { 
-    Write-Output "dsc_$($item.resource) { $($item.name) :"
-    foreach ($parameter in $item.parameters) {
-       $parameter.Item()
+$result = $data.result
+# $result = $data | ConvertFrom-Json 
+foreach ($resource in $result.resources) { 
+    Write-Output "dsc_$($resource.resource) { '$($resource.name)' :"
+    foreach ( $parameter in $resource.parameters ) {
+        Write-Output "  dsc_$($parameter.Keys) => '$($parameter.Values)',"
     }
-#         $k,$v = $parameter.split()
-#         Write-Output "${k} => ${v}"
-#     }
-#     Write-Output "}"
+    Write-Output "}"
 }
+
