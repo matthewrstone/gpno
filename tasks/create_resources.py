@@ -17,7 +17,7 @@ class CreateResources(TaskHelper):
             print("dsc_{} {{ '{}' :".format(i['resource'], i['name']))
             for p in params:
                 for k,v in p.items():
-                    print("  dsc_{} => '{}'".format(k,v))
+                    print("  dsc_{} => '{}',".format(k,v))
             print("}")
 
 if __name__ == '__main__':
