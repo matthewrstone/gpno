@@ -3,13 +3,13 @@
     "description": "create puppet resources from json object",
     "implementations": [
         {
-            "name": "create_resources.py",
+            "name": "create_resources_nix.py",
             "requirements": ["shell"],
             "files": ["python_task_helper/files/task_helper.py"],
             "input_method": "stdin"        
         },
         {
-            "name": "create_resources.ps1",
+            "name": "create_resources_win.ps1",
             "requirements": ["powershell"]
         }
       ]

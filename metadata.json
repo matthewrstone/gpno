@@ -5,6 +5,8 @@
   "summary": "Export group policy into puppet resources.",
   "license": "Apache-2.0",
   "source": "https://github.com/matthewrstone/gpno",
+  "project_page": "https://github.com/matthewrstone/gpno",
+  "issues_url": "https://github.com/matthewrstone/gpno/issues",
   "dependencies": [
     {
       "name": "hbuckle-powershellmodule",
