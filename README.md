@@ -15,8 +15,9 @@ This plan does the following:
 ## Usage
 
     # Install Microsoft's BaselineManagement powershell module
-    > bolt puppetfile install  # from the root of this project
-    > bolt plan run gpno::prep --nodes <your domain controller>
+    class profile::domain_controller {
+        include gpno::baseline_management
+    }
 
     # Export default domain policy
     > bolt plan run gpno::create_manifest --nodes <your domain controller> policyname='Default Domain Policy'
