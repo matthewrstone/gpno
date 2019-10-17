@@ -2,11 +2,14 @@
   "name": "souldo-gpno",
   "version": "0.1.0",
   "author": "Matthew Stone",
-  "summary": "",
+  "summary": "Export group policy into puppet resources.",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/matthewrstone/gpno",
   "dependencies": [
-
+    {
+      "name": "hbuckle-powershellmodule",
+      "version_requirement": ">=2.0.1"
+    }
   ],
   "operatingsystem_support": [
     {
