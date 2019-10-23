@@ -20,7 +20,7 @@ This plan does the following:
     }
 
     # Export default domain policy
-    > bolt plan run gpno::create_manifest --nodes <your domain controller> policyname='Default Domain Policy'
+    > bolt plan run gpno::create_manifest --nodes <your domain controller> policyname='Default Domain Policy' show_warnings=true
 
 *Note: please refer to the [Bolt documentation](http://www.puppet.com/docs/bolt) if you need assistance setting up an inventory or connection settings for your domain controller.*
 
@@ -33,7 +33,7 @@ Please!
 - ~~Make it a Bolt task.~~
 - ~~Create prep task for installing BaselineManagement module.~~
 - ~~Make a Bolt plan to do this on a DC and export the results locally.~~
-- Capture warnings for resources that the Microsoft BaselineManagement module cannot convert.
+- ~~Capture warnings for resources that the Microsoft BaselineManagement module cannot convert.~~
 - Find a way to convert those.
 - Clean up the temp folder post-conversion
 - Allow for using puppet native resources to replace DSC.
