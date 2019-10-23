@@ -1,3 +1,6 @@
+#Requires -Module GPRegistryPolicyParser
+#Requires -Module BaselineManagement
+#Requires -Module GroupPolicy
 Param(
     $PolicyName = 'Default Domain Policy'
 )
