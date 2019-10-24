@@ -1,5 +1,5 @@
 Param(
-    $PolicyName = 'Default Domain Policy'
+    $PolicyName
 )
 
 function Backup-Policy {
@@ -16,9 +16,11 @@ function Convert-DSC {
         $backupId
     )
     begin {
-        $objHash = @()
-        # TODO Warning variable is whack. Needs to be captured for non-supported objects.
-        ConvertFrom-GPO -Path C:\Windows\Temp\"{$backupId}" -OutputPath C:\Windows\Temp\"{$backupId}" -OutputConfigurationScript *>$null
+        $objHash = @{
+            resources = @()
+            warnings = @()
+        }
+        ConvertFrom-GPO -Path C:\Windows\Temp\"{$backupId}" -OutputPath C:\Windows\Temp\"{$backupId}" -WarningVariable nogo -OutputConfigurationScript *>$null
         $content = Get-Content C:\Windows\Temp\"{$backupId}"\DSCfromGPO.ps1
     }
     process {
@@ -39,12 +41,16 @@ function Convert-DSC {
                 $x.Parameters += @{$k = $v}
             }
             else {
-                if ($line -match "         }" ) { $objHash += $x }
-            }
-        
+                if ($line -match "         }" ) { $objHash.resources += $x }
+            }        
         }
     }
-    end { return @{ 'resources' = $objHash } }
+    end { 
+        # Collect Warnings from conversion into object hash
+        foreach ( $warning in $nogo ) { $objHash.warnings += $warning.Message }
+        # Return the resources and warnings
+        return $objHash
+    }
 }
 $backupId = (Backup-Policy -PolicyName $PolicyName)
 return Convert-Dsc -backupId $backupId | ConvertTo-Json -Depth 4
