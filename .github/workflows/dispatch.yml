@@ -1,0 +1,77 @@
+# Agent dispatch: route labeled issues to the right vendor's coding agent.
+#
+# - agent:claude  -> Claude GitHub App (mention-based; the app is installed on the repo
+#                    and reacts to @claude comments — this workflow posts the trigger)
+# - agent:codex   -> OpenAI codex-action
+# - agent:gemini  -> google-github-actions/run-gemini-cli
+#
+# Required repo secrets: OPENAI_API_KEY (codex), GEMINI_API_KEY (gemini).
+# Claude auth comes from the installed GitHub App, no secret here.
+
+name: Agent dispatch
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  claude:
+    if: github.event.label.name == 'agent:claude'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Claude via mention
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "@claude Please take this issue. Read AGENTS.md and docs/plan-v2.md first, follow the issue brief exactly, and open a PR from branch issue-" + context.issue.number + "-<slug>."
+            });
+
+  codex:
+    if: github.event.label.name == 'agent:codex'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Codex on this issue
+        uses: openai/codex-action@v1
+        with:
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          prompt: |
+            Work GitHub issue #${{ github.event.issue.number }}:
+            ${{ github.event.issue.title }}
+
+            ${{ github.event.issue.body }}
+
+            Rules: read AGENTS.md and docs/plan-v2.md first. One branch
+            (issue-${{ github.event.issue.number }}-<slug>), one PR referencing the
+            issue. CI must pass. Do not exceed the issue's stated scope.
+
+  gemini:
+    if: github.event.label.name == 'agent:gemini'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Gemini CLI on this issue
+        uses: google-github-actions/run-gemini-cli@v0
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: |
+            Work GitHub issue #${{ github.event.issue.number }}:
+            ${{ github.event.issue.title }}
+
+            ${{ github.event.issue.body }}
+
+            Rules: read AGENTS.md and docs/plan-v2.md first. One branch
+            (issue-${{ github.event.issue.number }}-<slug>), one PR referencing the
+            issue. CI must pass. Do not exceed the issue's stated scope.
+
+# NOTE: action version pins (@v1 / @v0) are best-guess as of authoring; verify current
+# tags for openai/codex-action and google-github-actions/run-gemini-cli before first use.

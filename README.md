@@ -1,39 +1,46 @@
 # GPNO
 
-## What's all this then?
+**Transform Microsoft Group Policy into Puppet-native resources and Hiera data. No DSC.**
 
-GPNO is an experimental set of Bolt tasks and plan to export Group Policy from domain controllers into DSC resources that can be utilized by Puppet. It requires Microsoft's BaselineManagement Powershell module to be installed on the domain controller.
+> **⚠ 2.0 is under active development on this branch (`2.x`).**
+> The 0.x releases (BaselineManagement/DSC-based) are unsupported and depended on
+> Microsoft modules that were archived in 2022. The last 0.x state is preserved at the
+> `0.1.1` tag. Do not use 0.x for new work.
 
-This plan does the following:
+## What 2.0 does
 
-- Connects to your domain controller.
-- Backs up GPO to temp folder.
-- Converts GPO to DSC resources.
-- Exports as JSON to your localhost.
-- Converts into Puppet resources using Powershell (Windows) or Python (other)
+GPO backups (and SYSVOL policy folders) are a small set of frozen, documented file
+formats. gpno 2.0 parses them directly — `registry.pol` (MS-GPREG), `GptTmpl.inf`
+(secedit), `audit.csv`, GP Preferences XML — and emits **Hiera data** consumed by a
+generic profile class plus three native types (`security_policy`, `user_rights`,
+`audit_policy`), with registry policy handled via `puppetlabs-registry`.
 
-## Usage
+No BaselineManagement. No DSC. No PSGallery dependencies. No PowerShell at runtime.
 
-    # Install Microsoft's BaselineManagement powershell module
-    class profile::domain_controller {
-        include gpno::baseline_management
-    }
+- **Scope (2.0.0):** Computer Configuration only; user-side settings are reported, not
+  enforced. Unmappable settings land in a warnings report — never silently dropped.
+- **Classification:** an `ad_ou` fact maps machines to OU-depth Hiera tiers mirroring
+  GPO inheritance (enforced links included); security-carrying tiers require an explicit
+  opt-in flag or the bundled trusted-external LDAP script.
+- **Requirements:** Puppet >= 8.0 < 9.0 (incl. OpenVox 8), Windows Server 2016–2025,
+  Windows 10/11.
 
-    # Export default domain policy
-    > bolt plan run gpno::create_manifest --nodes <your domain controller> policyname='Default Domain Policy' show_warnings=true
+Full design: [docs/plan-v2.md](docs/plan-v2.md).
 
-*Note: please refer to the [Bolt documentation](http://www.puppet.com/docs/bolt) if you need assistance setting up an inventory or connection settings for your domain controller.*
+## Status
+
+Milestone M1 in progress: IR schema, fixture corpus, lab automation, and the
+registry.pol / GptTmpl.inf parsers. See the issue tracker — work items are labeled by
+workstream (`ws:*`) and assigned coding agent (`agent:*`).
 
 ## Contributing
 
-Please!
+This project is developed by a mix of human review and coding agents (Claude, Codex,
+Gemini) under [AGENTS.md](AGENTS.md) rules: one issue per PR, CI green before review,
+tests required, and a human security gate on all enforcement-path code. Human
+contributions are welcome under the same rules — pick an unassigned issue or open one
+using the agent-task template.
 
-## TO-DO
+## License
 
-- ~~Make it a Bolt task.~~
-- ~~Create prep task for installing BaselineManagement module.~~
-- ~~Make a Bolt plan to do this on a DC and export the results locally.~~
-- ~~Capture warnings for resources that the Microsoft BaselineManagement module cannot convert.~~
-- Find a way to convert those.
-- Clean up the temp folder post-conversion
-- Allow for using puppet native resources to replace DSC.
+Apache-2.0. Author: Matthew Stone (souldo).

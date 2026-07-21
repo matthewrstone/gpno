@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: ["2.x", "main"]
+
+jobs:
+  validate:
+    name: Validate (lint, metadata, syntax)
+    runs-on: ubuntu-latest
+    container: puppet/pdk:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: pdk validate
+        run: pdk validate --format=text
+
+  unit:
+    name: Unit tests (Linux)
+    runs-on: ubuntu-latest
+    container: puppet/pdk:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: pdk test unit
+        run: pdk test unit --format=text
+
+  schema:
+    name: IR schema + fixture validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+      - name: Validate IR schema and expected-IR fixtures
+        run: |
+          if [ -f schemas/gpno-ir.schema.json ]; then
+            gem install json_schemer --no-document
+            ruby tools/validate_fixtures.rb
+          else
+            echo "schema not present yet — skipping"
+          fi
+
+  # windows-latest provider round-trip job is added at M2 (see plan v2, R8/B7).
