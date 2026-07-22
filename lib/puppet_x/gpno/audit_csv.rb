@@ -51,12 +51,12 @@ module PuppetX
 
         entries = {}
 
-        table.each_with_index do |row, idx|
+        table.each_with_index do |row, row_index|
           guid = row[GUID_HEADER]&.strip
           if guid.nil? || guid.empty?
             name = row[NAME_HEADER]&.strip || '<unknown>'
             raise ArgumentError,
-                  "Row #{idx + 2} (subcategory '#{name}') has a missing or empty " \
+                  "Row #{row_index + 2} (subcategory '#{name}') has a missing or empty " \
                   "'#{GUID_HEADER}' value. All audit subcategory rows must have a " \
                   "valid GUID."
           end

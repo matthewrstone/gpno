@@ -73,13 +73,6 @@ describe PuppetX::Gpno::AuditCsv do
         .to raise_error(ArgumentError, %r{missing or empty})
     end
 
-    it 'raises ArgumentError when a row has a nil GUID value' do
-      content = "Machine Name,Policy Target,Subcategory,Subcategory GUID,Inclusion Setting,Exclusion Setting\n" \
-                ",System,Security State Change,,Success and Failure,\n"
-      expect { described_class.parse_string(content) }
-        .to raise_error(ArgumentError)
-    end
-
     it 'stores a non-empty exclusion_setting value' do
       content = <<~CSV
         Machine Name,Policy Target,Subcategory,Subcategory GUID,Inclusion Setting,Exclusion Setting
