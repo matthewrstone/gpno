@@ -1,0 +1,8 @@
+Machine Name,Policy Target,Subcategory,Subcategory GUID,Inclusion Setting,Exclusion Setting
+,System,Security State Change,{0CCE9210-69AE-11D9-BED3-505054503030},Success and Failure,
+,System,Security System Extension,{0CCE9211-69AE-11D9-BED3-505054503030},No Auditing,
+,System,System Integrity,{0CCE9212-69AE-11D9-BED3-505054503030},Success and Failure,
+,Logon/Logoff,Logon,{0CCE9215-69AE-11D9-BED3-505054503030},Success,
+,Logon/Logoff,Logoff,{0CCE9216-69AE-11D9-BED3-505054503030},Success,
+,Object Access,File System,{0CCE921D-69AE-11D9-BED3-505054503030},No Auditing,
+,Privilege Use,Sensitive Privilege Use,{0CCE9228-69AE-11D9-BED3-505054503030},Success and Failure,

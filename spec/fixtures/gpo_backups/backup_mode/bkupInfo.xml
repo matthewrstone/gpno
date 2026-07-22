@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BackupInstInfo>
+  <ID>{FEDCBA09-8765-4321-FEDC-BA9876543210}</ID>
+  <GPODisplayName><![CDATA[Test Security Policy]]></GPODisplayName>
+  <GPOGuid>{ABCD1234-5678-90AB-CDEF-012345678901}</GPOGuid>
+  <GPODomain>test.example.com</GPODomain>
+  <GPODomainGuid>{12345678-1234-1234-1234-123456789ABC}</GPODomainGuid>
+  <GPODomainController>dc01.test.example.com</GPODomainController>
+  <BackupTime>2024-01-15T10:30:00Z</BackupTime>
+  <Comment></Comment>
+</BackupInstInfo>
