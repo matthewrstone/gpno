@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GroupPolicyBackupScheme Version="1" type="GroupPolicyBackup"
+  schemaLocation="http://www.microsoft.com/GroupPolicy/GPOOperations/Manifest BackupScheme.xsd">
+  <GroupPolicyObject>
+    <GroupPolicyData>
+      <ID>{ABCD1234-5678-90AB-CDEF-012345678901}</ID>
+      <DisplayName><![CDATA[Test Security Policy]]></DisplayName>
+      <Description><![CDATA[]]></Description>
+      <CreatedTime>2024-01-15T10:00:00</CreatedTime>
+      <LastModifiedTime>2024-01-15T10:30:00</LastModifiedTime>
+      <ReadTime>2024-01-15T10:30:00</ReadTime>
+      <WriteTime>2024-01-15T10:30:00</WriteTime>
+      <WMIFilterID></WMIFilterID>
+      <Links>
+        <Link>
+          <SOMId>OU=Workstations,DC=test,DC=example,DC=com</SOMId>
+          <SOMPath>test.example.com/Workstations</SOMPath>
+          <Enabled>true</Enabled>
+          <NoOverride>false</NoOverride>
+          <DomainName>test.example.com</DomainName>
+          <OwnerDN>CN=Administrator,CN=Users,DC=test,DC=example,DC=com</OwnerDN>
+        </Link>
+      </Links>
+    </GroupPolicyData>
+  </GroupPolicyObject>
+</GroupPolicyBackupScheme>

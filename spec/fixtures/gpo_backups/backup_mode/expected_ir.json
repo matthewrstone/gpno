@@ -1,0 +1,19 @@
+{
+  "id": "{ABCD1234-5678-90AB-CDEF-012345678901}",
+  "display_name": "Test Security Policy",
+  "description": "",
+  "wmi_filter_id": null,
+  "links": [
+    {
+      "som_id": "OU=Workstations,DC=test,DC=example,DC=com",
+      "som_path": "test.example.com/Workstations",
+      "enabled": true,
+      "no_override": false,
+      "domain_name": "test.example.com"
+    }
+  ],
+  "domain": "test.example.com",
+  "domain_guid": "{12345678-1234-1234-1234-123456789ABC}",
+  "backup_time": "2024-01-15T10:30:00Z",
+  "source": "backup"
+}

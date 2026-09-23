@@ -1,0 +1,43 @@
+{
+  "audit_policy": {
+    "{0CCE9210-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "Security State Change",
+      "inclusion_setting": "Success and Failure",
+      "exclusion_setting": null
+    },
+    "{0CCE9211-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "Security System Extension",
+      "inclusion_setting": "No Auditing",
+      "exclusion_setting": null
+    },
+    "{0CCE9212-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "System Integrity",
+      "inclusion_setting": "Success and Failure",
+      "exclusion_setting": null
+    },
+    "{0CCE9215-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "Logon",
+      "inclusion_setting": "Success",
+      "exclusion_setting": null
+    },
+    "{0CCE9216-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "Logoff",
+      "inclusion_setting": "Success",
+      "exclusion_setting": null
+    },
+    "{0CCE921D-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "File System",
+      "inclusion_setting": "No Auditing",
+      "exclusion_setting": null
+    },
+    "{0CCE9228-69AE-11D9-BED3-505054503030}": {
+      "subcategory_name": "Sensitive Privilege Use",
+      "inclusion_setting": "Success and Failure",
+      "exclusion_setting": null
+    }
+  },
+  "scope": "Machine",
+  "provenance": {
+    "source": "audit_csv"
+  }
+}
