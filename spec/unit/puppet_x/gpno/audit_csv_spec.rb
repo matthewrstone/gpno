@@ -5,7 +5,7 @@ require 'json'
 require 'puppet_x/gpno/audit_csv'
 
 describe PuppetX::Gpno::AuditCsv do
-  let(:fixture_dir) { File.expand_path('../../../../fixtures/gpo_backups/audit_csv', __dir__) }
+  let(:fixture_dir) { File.expand_path('../../../fixtures/gpo_backups/audit_csv', __dir__) }
   let(:csv_path)    { File.join(fixture_dir, 'audit.csv') }
   let(:expected_ir) { JSON.parse(File.read(File.join(fixture_dir, 'expected_ir.json'))) }
 

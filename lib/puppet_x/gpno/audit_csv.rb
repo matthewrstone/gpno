@@ -45,8 +45,8 @@ module PuppetX
         unless table.headers.include?(GUID_HEADER)
           raise ArgumentError,
                 "audit.csv is missing the required '#{GUID_HEADER}' column. " \
-                "Only auditpol /get /r format (with GUID column) is accepted; " \
-                "never key by localized subcategory name."
+                'Only auditpol /get /r format (with GUID column) is accepted; ' \
+                'never key by localized subcategory name.'
         end
 
         entries = {}
@@ -58,7 +58,7 @@ module PuppetX
             raise ArgumentError,
                   "Row #{row_index + 2} (subcategory '#{name}') has a missing or empty " \
                   "'#{GUID_HEADER}' value. All audit subcategory rows must have a " \
-                  "valid GUID."
+                  'valid GUID.'
           end
 
           exclusion = row[EXCLUSION_HEADER]&.strip

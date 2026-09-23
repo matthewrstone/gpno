@@ -44,7 +44,7 @@ module PuppetX
         else
           raise ArgumentError,
                 "Cannot determine backup mode for path: #{path}. " \
-                "Provide a directory, a Backup.xml file, or a GPT.INI file."
+                'Provide a directory, a Backup.xml file, or a GPT.INI file.'
         end
       end
 
@@ -161,7 +161,7 @@ module PuppetX
 
         {
           'displayName' => ini['displayName'],
-          'version'     => ini['Version'] ? ini['Version'].to_i : nil,
+          'version'     => ini['Version']&.to_i,
         }
       end
       private_class_method :parse_gpt_ini

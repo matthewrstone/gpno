@@ -7,7 +7,7 @@ require 'fileutils'
 require 'puppet_x/gpno/backup_manifest'
 
 describe PuppetX::Gpno::BackupManifest do
-  let(:fixture_root)    { File.expand_path('../../../../fixtures/gpo_backups', __dir__) }
+  let(:fixture_root)    { File.expand_path('../../../fixtures/gpo_backups', __dir__) }
   let(:backup_dir)      { File.join(fixture_root, 'backup_mode') }
   let(:sysvol_dir)      { File.join(fixture_root, 'sysvol_mode') }
   let(:gpt_ini_path)    { File.join(sysvol_dir, 'GPT.INI') }
