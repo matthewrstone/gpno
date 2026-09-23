@@ -21,3 +21,12 @@
     # safe option here.
     Style/ClassAndModuleChildren:
       EnforcedStyle: nested
+
+# Opt out: template-supplied guard is inert here (pairs with a
+# pull_request_target + "allowed-for-ci" label gate this repo doesn't run —
+# ci.yml uses plain pull_request:) and references an external org's `@main`
+# (mutable ref, not a pinned SHA) purely for that unused trigger surface.
+# Re-add deliberately, pinned to a SHA, if/when this repo adopts the
+# CODEOWNER-gated fork-CI pattern it's designed to protect.
+.github/workflows/fork_ci_label_guard.yml:
+  unmanaged: true
